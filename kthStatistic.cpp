@@ -15,14 +15,19 @@ int Partition(std::vector<int>& arr, int left, int right){
     return j;
 }
 
-int kth(std::vector<int> arr, int k){
-    int left=0, right=arr.size()-1;
+void kth(std::vector<int> arr, int k){
+    int n = arr.size(), left = 0, right = n-1, t = n-k;
+    if (k <= 0 || k > n) return;
     while (1){
         int m=Partition(arr,left,right);
-        if (m==k){
-            return arr[k];
+        if (m == t){
+            for (int i=t; i<n; i++){
+                std::cout<<arr[i]<<' ';
+            }
+            std::cout<<'\n';
+            return;
         }
-        else if (m>k){
+        else if (m>t){
             right=m-1;
         }
         else{
@@ -32,7 +37,10 @@ int kth(std::vector<int> arr, int k){
 }
 
 int main(){
-    std::vector<int> arr{4,5,8,2};
-    std::cout<<kth(arr,2)<<'\n';
+    std::vector<int> arr{1,6,9,3,2,5,4,8,7};
+    for (int i=1; i<=arr.size(); i++){
+        std::cout<<"\""<<i<<"\" наибольших элементов массива:\n";
+        kth(arr,i);
+    }
     return 0;
 }
